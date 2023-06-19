@@ -1,0 +1,59 @@
+<style>
+  .table {
+    width: 100%;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .table thead th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .table tbody tr:hover {
+    background-color: #f2f2f2;
+  }
+</style>
+
+<div>
+  <h2>Add New Document</h2>
+  <div class="form-container">
+    <form>
+      <!-- New document form code goes here -->
+    </form>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Document ID</th>
+      <th>Adhar Card No</th>
+      <th>Passport File</th>
+      <th>Aadhar File</th>
+      <th>Passport No</th>
+      <th>Visa File</th>
+      <th>Visa No</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let document of documents" (click)="select(document)">
+      <td>{{ document.documentId }}</td>
+      <td>{{ document.adharCardNo }}</td>
+      <td>{{ document.passportFile }}</td>
+      <td>{{ document.aadharFile }}</td>
+      <td>{{ document.passportNo }}</td>
+      <td>{{ document.visaFile }}</td>
+      <td>{{ document.visaNo }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">
+        <button>Add</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,51 @@
+<style>
+  .navbar {
+    background-color: #0a86ba;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Align items vertically */
+  }
+
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  .navbar li {
+    margin: 0 10px;
+  }
+
+  .navbar li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .navbar li a:hover {
+    color: #00fff2;
+  }
+
+  .navbar-title {
+    color: #fff;
+    font-size: 24px;
+    margin-right: auto; /* Pushes the title to the right */
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
+
+<div class="navbar">
+  <a routerLink="/login" class="navbar-title">TravelDesk</a>
+  <ul>
+    <!-- <li *ngIf="login"><a routerLink="/login">Login</a></li> -->
+    <li *ngIf="!login" class="logout"><a routerLink="/logout">Logout</a></li>
+  </ul>
+</div>
+
+<!-- <router-outlet></router-outlet> -->
+

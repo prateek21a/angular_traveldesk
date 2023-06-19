@@ -1,0 +1,60 @@
+<style>
+  .record-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .record-table th,
+  .record-table td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #ccc;
+  }
+
+  .record-table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+  }
+
+  .record-table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  .record-table tbody tr:hover {
+    background-color: #e0e0e0;
+  }
+
+  .record-table span {
+    font-weight: bold;
+  }
+</style>
+
+<table class="record-table">
+  <thead>
+    <tr>
+      <th>Comment Name</th>
+      <th>Given By</th>
+      <th>Time</th>
+      <th>Created By</th>
+      <th>Modified By</th>
+      <th>Created Date</th>
+      <th>Modified Date</th>
+      <th>Description</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let comment of comments" (click)="select(comment)">
+      <td>{{ comment.commentName }}</td>
+      <td>{{ comment.commentGivenBy }}</td>
+      <td>{{ comment.commentTime }}</td>
+      <td>{{ comment.createdBy }}</td>
+      <td>{{ comment.modifiedBy }}</td>
+      <td>{{ comment.createdDate }}</td>
+      <td>{{ comment.modifiedDate }}</td>
+      <td>{{ comment.description }}</td>
+      <td>{{ comment.isActive }}</td>
+    </tr>
+  </tbody>
+</table>

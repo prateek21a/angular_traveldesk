@@ -1,0 +1,204 @@
+<style>
+     .full-screen-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-items: center;
+    align-items: center;
+  }
+  
+  .full-screen-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+    .full-screen-form input[type="text"],
+    .full-screen-form input[type="number"],
+    .full-screen-form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: #fff;
+      color: #555;
+      transition: border-color 0.3s;
+    }
+  
+    .full-screen-form input[type="text"]:focus,
+    .full-screen-form input[type="number"]:focus,
+    .full-screen-form select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+  
+    .full-screen-form input[type="checkbox"] {
+      margin-top: 10px;
+    }
+  
+    .full-screen-form .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .full-screen-form .checkbox-group label {
+      margin-bottom: 0;
+    }
+  
+    .full-screen-form button {
+      grid-column: 1 / -1;
+      justify-self: center;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  
+    .full-screen-form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+  
+  
+  <form #commentForm="ngForm" (submit)="submitForm()" class="travel-request-form full-screen-form">
+    <div>
+      <label for="location">Current Location:</label>
+      <input type="text" id="location" name="location" [(ngModel)]="comment.location" required>
+    </div>
+  
+    <div>
+      <label for="reasonForTravelling">Reason for Travelling:</label>
+      <input type="text" id="reasonForTravelling" name="reasonForTravelling" [(ngModel)]="comment.reasonForTravelling" required>
+    </div>
+  
+    <div>
+      <label for="departureCity">Departure City:</label>
+      <select id="departureCity" name="departureCity" [(ngModel)]="comment.departureCity" required>
+        <option value="">Select a city</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Ahmedabad">Ahmedabad</option>
+        <option value="Pune">Pune</option>
+        <option value="Jaipur">Jaipur</option>
+        <option value="Lucknow">Lucknow</option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="destinationCity">Destination City:</label>
+      <input type="text" id="destinationCity" name="destinationCity" [(ngModel)]="comment.destinationCity" required>
+    </div>
+  
+    <div>
+      <label for="durationOfTravel">Duration of Travel (In days):</label>
+      <input type="number" id="durationOfTravel" name="durationOfTravel" [(ngModel)]="comment.durationOfTravel" required min="1">
+    </div>
+  
+    <div>
+      <label for="hotelRequired">Hotel Required:</label>
+      <input type="checkbox" id="hotelRequired" name="hotelRequired" [(ngModel)]="comment.hotelRequired">
+    </div>
+  
+    <div *ngIf="comment.hotelRequired">
+      <div>
+        <label for="mealNeeded">Meal Needed:</label>
+        <input type="checkbox" id="mealNeeded" name="mealNeeded" [(ngModel)]="comment.mealNeeded">
+      </div>
+  
+      <div *ngIf="comment.mealNeeded">
+        <label>Meal Type:</label>
+  
+        <div>
+          <input type="checkbox" id="lunch" name="mealType" value="lunch">
+          <label for="lunch">Lunch</label>
+        </div>
+  
+        <div>
+          <input type="checkbox" id="dinner" name="mealType" value="dinner">
+          <label for="dinner">Dinner</label>
+        </div>
+  
+        <div>
+          <input type="checkbox" id="both" name="mealType" value="both">
+          <label for="both">Both</label>
+        </div>
+      </div>
+  
+      <div *ngIf="comment.mealNeeded">
+        <label for="mealType">Meal Type:</label>
+        <select id="mealType" name="mealType" [(ngModel)]="comment.mealType">
+          <option value="veg">Veg</option>
+          <option value="nonveg">Non-Veg</option>
+        </select>
+      </div>
+    </div>
+  
+    <div>
+      <label for="travelType">Travel Type:</label>
+      <select id="travelType" name="travelMode" [(ngModel)]="comment.travelMode" required>
+        <option value="">Select</option>
+        <option value="International">International</option>
+        <option value="Domestic">Domestic</option>
+      </select>
+    </div>
+  
+    <div *ngIf="comment.travelMode === 'Domestic'">
+      <div>
+        <label for="aadharCard">Aadhar Card:</label>
+        <input type="file" id="aadharCard" name="aadharCard" required>
+      </div>
+  
+      <div>
+        <label for="domesticFlightDate">Domestic Flight Date:</label>
+        <input type="date" id="domesticFlightDate" name="domesticFlightDate" [(ngModel)]="comment.departureDate" required [min]="minDepartureDate()">
+      </div>
+    </div>
+  
+    <div *ngIf="comment.travelMode === 'International'">
+      <div>
+        <label for="passportNumber">Passport Number:</label>
+        <input type="text" id="passportNumber" name="passportNumber" required>
+      </div>
+  
+      <div>
+        <label for="passportFile">Upload Passport File:</label>
+        <input type="file" id="passportFile" name="passportFile">
+      </div>
+  
+      <div>
+        <label for="visaFile">Upload Visa File:</label>
+        <input type="file" id="visaFile" name="visaFile">
+      </div>
+  
+      <div>
+        <label for="internationalFlightDate">Flight Date:</label>
+        <input type="date" id="internationalFlightDate" name="internationalFlightDate" [(ngModel)]="comment.departureDate" required [min]="minDepartureDate()">
+      </div>
+  
+      <div>
+        <label for="aadharCard">Aadhar Card:</label>
+        <input type="file" id="aadharCard" name="aadharCard" required>
+      </div>
+    </div>
+  
+    <button type="submit">Submit</button>
+  </form>
+  
